@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   name: redis
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     name: redis
   template:
@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: redis
-        image: kubernetes/redis:v1
+        image: 172.30.188.59:5000/service-broker/redis-openshift-orchestration
         ports:
         - containerPort: 6379
         resources:

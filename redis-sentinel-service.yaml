@@ -9,4 +9,4 @@ spec:
     - port: 26379
       targetPort: 26379
   selector:
-    redis-sentinel: "true"
+    sb-instanceid-redis: sentinel

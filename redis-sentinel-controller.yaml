@@ -1,17 +1,16 @@
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  name: redis-sentinel
+  name: sb-instanceid-redis-sentinel
 spec:
   replicas: 3
   selector:
-    redis-sentinel: "true"
+    sb-instanceid-redis: sentinel
   template:
     metadata:
       labels:
-        name: redis-sentinel
-        redis-sentinel: "true"
-        role: sentinel
+        sb-instanceid-redis: sentinel
+        servicebroker: sb-instanceid-redis
     spec:
       containers:
       - name: sentinel
@@ -19,5 +18,9 @@ spec:
         env:
           - name: SENTINEL
             value: "true"
+          - name: SENTINEL_HOST
+            value: sb-instanceid-redis
+          - name: SENTINEL_PORT
+            value: 26379
         ports:
           - containerPort: 26379

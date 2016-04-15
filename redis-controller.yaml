@@ -1,19 +1,25 @@
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  name: redis
+  name: sb-instanceid-redis
 spec:
   replicas: 3
   selector:
-    name: redis
+    sb-instanceid-redis: redis
   template:
     metadata:
       labels:
-        name: redis
+        sb-instanceid-redis: redis
+        servicebroker: sb-instanceid-redis
     spec:
       containers:
       - name: redis
         image: 172.30.188.59:5000/service-broker/redis-openshift-orchestration
+        env:
+          - name: SENTINEL_HOST
+            value: sb-instanceid-redis
+          - name: SENTINEL_PORT
+            value: 26379
         ports:
         - containerPort: 6379
         resources:

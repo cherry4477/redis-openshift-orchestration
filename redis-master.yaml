@@ -2,10 +2,10 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    name: redis
-    redis-sentinel: "true"
-    role: master
-  name: redis-master
+    sb-instanceid-redis: redis
+    sb-instanceid-redis: sentinel
+    servicebroker: sb-instanceid-redis
+  name: sb-instanceid-redis-boot
 spec:
   containers:
     - name: master
@@ -26,6 +26,10 @@ spec:
       env:
         - name: SENTINEL
           value: "true"
+        - name: SENTINEL_HOST
+          value: sb-instanceid-redis
+        - name: SENTINEL_PORT
+          value: 26379
       ports:
         - containerPort: 26379
   volumes:

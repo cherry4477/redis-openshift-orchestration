@@ -22,5 +22,7 @@ spec:
             value: sb-instanceid-redis
           - name: SENTINEL_PORT
             value: "26379"
+          - name: REDIS_PASSWORD
+            value: test1234
         ports:
           - containerPort: 26379

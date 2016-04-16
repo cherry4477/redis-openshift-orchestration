@@ -43,7 +43,7 @@ function launchsentinel() {
   sentinel_conf=sentinel.conf
 
   echo "sentinel monitor mymaster ${master} 6379 2" > ${sentinel_conf}
-  echo "sentinel auth-pass mymaster ${REDIS_PASSWORD}" > ${sentinel_conf}
+  echo "sentinel auth-pass mymaster ${REDIS_PASSWORD}" >> ${sentinel_conf}
   echo "sentinel down-after-milliseconds mymaster 6000" >> ${sentinel_conf}
   echo "sentinel failover-timeout mymaster 12000" >> ${sentinel_conf}
   echo "sentinel parallel-syncs mymaster 1" >> ${sentinel_conf}

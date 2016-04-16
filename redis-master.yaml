@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   labels:
     sb-instanceid-redis: redis
-    sb-instanceid-redis: sentinel
+    sb-instanceid-sentinel: sentinel
     servicebroker: sb-instanceid-redis
   name: sb-instanceid-redis-boot
 spec:

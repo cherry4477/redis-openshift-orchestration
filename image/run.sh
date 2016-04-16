@@ -19,6 +19,7 @@ function launchmaster() {
     echo "Redis master data doesn't exist, data won't be persistent!"
     mkdir /redis-master-data
   fi
+  perl -pi -e "s/%password%/${REDIS_PASSWORD}/" /redis-master/redis.conf
   redis-server /redis-master/redis.conf
 }
 
@@ -68,6 +69,7 @@ function launchslave() {
   done
   perl -pi -e "s/%master-ip%/${master}/" /redis-slave/redis.conf
   perl -pi -e "s/%master-port%/6379/" /redis-slave/redis.conf
+  perl -pi -e "s/%password%/${REDIS_PASSWORD}/" /redis-slave/redis.conf
   redis-server /redis-slave/redis.conf
 }
 

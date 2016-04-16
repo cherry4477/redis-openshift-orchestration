@@ -5,11 +5,11 @@ metadata:
 spec:
   replicas: 3
   selector:
-    sb-instanceid-redis: sentinel
+    sb-instanceid-sentinel: sentinel
   template:
     metadata:
       labels:
-        sb-instanceid-redis: sentinel
+        sb-instanceid-sentinel: sentinel
         servicebroker: sb-instanceid-redis
     spec:
       containers:

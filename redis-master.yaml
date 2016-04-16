@@ -13,6 +13,8 @@ spec:
       env:
         - name: MASTER
           value: "true"
+        - name: REDIS_PASSWORD
+          value: test1234
       ports:
         - containerPort: 6379
       resources:

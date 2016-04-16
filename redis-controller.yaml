@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   name: sb-instanceid-redis
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     sb-instanceid-redis: redis
   template:
@@ -20,6 +20,8 @@ spec:
             value: sb-instanceid-redis
           - name: SENTINEL_PORT
             value: "26379"
+          - name: REDIS_PASSWORD
+            value: test1234
         ports:
         - containerPort: 6379
         resources:

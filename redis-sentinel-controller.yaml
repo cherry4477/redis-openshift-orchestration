@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   name: sb-instanceid-redis-sentinel
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     sb-instanceid-sentinel: sentinel
   template:

@@ -25,7 +25,7 @@ function launchmaster() {
 
 function launchsentinel() {
   while true; do
-    master=$(redis-cli -h ${SENTINEL_HOST} -p ${SENTINEL_PORT} --csv SENTINEL get-master-addr-by-name mymaster | tr ',' ' ' | cut -d' ' -f1)
+    master=$(redis-cli -h ${SENTINEL_HOST} -p ${SENTINEL_PORT} --csv SENTINEL get-master-addr-by-name ${CLUSTER_NAME} | tr ',' ' ' | cut -d' ' -f1)
     if [[ -n ${master} ]]; then
       master="${master//\"}"
     else
@@ -42,18 +42,20 @@ function launchsentinel() {
 
   sentinel_conf=sentinel.conf
 
-  echo "sentinel monitor mymaster ${master} 6379 2" > ${sentinel_conf}
-  echo "sentinel auth-pass mymaster ${REDIS_PASSWORD}" >> ${sentinel_conf}
-  echo "sentinel down-after-milliseconds mymaster 6000" >> ${sentinel_conf}
-  echo "sentinel failover-timeout mymaster 12000" >> ${sentinel_conf}
-  echo "sentinel parallel-syncs mymaster 1" >> ${sentinel_conf}
+  echo "sentinel monitor ${CLUSTER_NAME} ${master} 6379 2" > ${sentinel_conf}
+  echo "sentinel auth-pass ${CLUSTER_NAME} ${REDIS_PASSWORD}" >> ${sentinel_conf}
+  echo "sentinel down-after-milliseconds ${CLUSTER_NAME} 6000" >> ${sentinel_conf}
+  echo "sentinel failover-timeout ${CLUSTER_NAME} 12000" >> ${sentinel_conf}
+  echo "sentinel parallel-syncs ${CLUSTER_NAME} 1" >> ${sentinel_conf}
+
+  cp ${sentinel_conf} ${sentinel_conf}.initial
 
   redis-sentinel ${sentinel_conf}
 }
 
 function launchslave() {
   while true; do
-    master=$(redis-cli -h ${SENTINEL_HOST} -p ${SENTINEL_PORT} --csv SENTINEL get-master-addr-by-name mymaster | tr ',' ' ' | cut -d' ' -f1)
+    master=$(redis-cli -h ${SENTINEL_HOST} -p ${SENTINEL_PORT} --csv SENTINEL get-master-addr-by-name ${CLUSTER_NAME} | tr ',' ' ' | cut -d' ' -f1)
     if [[ -n ${master} ]]; then
       master="${master//\"}"
     else

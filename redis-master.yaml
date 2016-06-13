@@ -5,7 +5,7 @@ metadata:
     sb-instanceid-redis: redis
     sb-instanceid-sentinel: sentinel
     servicebroker: sb-instanceid-redis
-  name: sb-instanceid-redis-boot
+  name: sb-instanceid-redisbt
 spec:
   containers:
     - name: master

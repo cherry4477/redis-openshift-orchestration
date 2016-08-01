@@ -9,7 +9,7 @@
 
 	1.必须在网内，抱歉
 	2.通过哨兵查找master和slaves,详见：http://redis.io/topics/sentinel
-	redis-cli -h sb-instanceid-redis -p 26379 --csv SENTINEL get-master-addr-by-name mymaster | tr ',' ' ' | cut -d' ' -f1)
+	redis-cli -h sb-instanceid-redis -p 26379 --csv SENTINEL get-master-addr-by-name mymaster | tr ',' ' ' | cut -d' ' -f1
 	redis-cli -h sb-instanceid-redis -p 26379 --csv SENTINEL slaves mymaster
 	3.直接连接redis
 	redis-cli -h 刚获得的地址 -p 6379
